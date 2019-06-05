@@ -11,19 +11,19 @@ import {
 const initialState = {
   dog: null,
   fetching: false,
-  error: false
+  error: null
 };
 
 //the reducer - we will use the constants here to avoid typos
 function reducer(state, action) {
   switch (action.type) {
     case API_CALL_REQUEST:
-      return { ...state, fetching: true, error: false };
+      return { ...state, fetching: true, error: null };
     case API_CALL_SUCCESS:
-      return;
+      return { ...state, fetching: false, dog: action.dog };
     case API_CALL_FAILURE:
-      return;
+      return { ...state, fetching: false, dog: null, error: action.error };
     default:
-      return;
+      return state;
   }
 }
