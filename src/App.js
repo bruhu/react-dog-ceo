@@ -2,10 +2,22 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { store } from "./store";
+// import React bindings for Redux
+import { connect } from "react-redux";
 
 class App extends Component {
   render() {
-    return <div />;
+    return (
+      <div>
+        who dis
+        <header className="App-header">
+          <img src={this.props.dog || logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">The Dog Saga</h1>
+          <p className="App-intro">Replace the React icon with a Dog CEO!</p>
+          <button onClick={this.props.onRequestDog}>Request a dog</button>
+        </header>
+      </div>
+    );
   }
 }
 
@@ -13,8 +25,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     fetch: state.fetching,
-    dog: store.dog,
-    error: store.error
+    dog: state.dog,
+    error: state.error
   };
 };
 
@@ -24,4 +36,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
